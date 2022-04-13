@@ -1,0 +1,11 @@
+-- Mappings
+vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fg', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fb', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fh', [[<cmd>lua require('telescope.builtin').help_tags()<cr>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fc', [[<cmd>lua require('telescope.builtin').colorscheme()<cr>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ft', [[<cmd>lua require('telescope.builtin').tags()<cr>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fm', [[<cmd>lua require('telescope.builtin').man_pages()<cr>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fr', [[<cmd>lua require('telescope.builtin').lsp_references()<cr>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fs', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fws', [[<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>]], { noremap = true, silent = true })
