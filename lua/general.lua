@@ -89,3 +89,17 @@ cmd[[
 cmd[[
 	autocmd FileType markdown let g:indentLine_enabled = 0
 ]]
+
+-- Remember cursor position
+exec([[
+  augroup remember-cursor-position
+    autocmd!
+    autocmd BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit' | exe "normal! g`\"" | endif
+  augroup END
+]], false)
+
+
+-- Autoformat on save
+cmd[[
+    autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()
+]]

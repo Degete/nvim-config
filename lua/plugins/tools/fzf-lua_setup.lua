@@ -13,3 +13,4 @@ vim.api.nvim_set_keymap('n', '<leader>ft', [[<cmd>lua require('fzf-lua').tags(op
 vim.api.nvim_set_keymap('n', '<leader>fr', [[<cmd>lua require('fzf-lua').lsp_references(opts)<cr>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fs', [[<cmd>lua require('fzf-lua').lsp_document_symbols(opts)<cr>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fws', [[<cmd>lua require('fzf-lua').lsp_workspace_symbols(opts)<cr>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<M-CR>', [[<cmd>lua require('fzf-lua').lsp_code_actions()<cr>]], { noremap = true, silent = true })

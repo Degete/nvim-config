@@ -1,5 +1,5 @@
 -- Speed loading lua modules
-require('impatient')
+pcall(require, 'impatient')
 
 -- General
 require('general')
