@@ -43,21 +43,23 @@ end
 
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.preselectSupport = true
-capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-capabilities.textDocument.completion.completionItem.deprecatedSupport = true
-capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
-capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    'documentation',
-    'detail',
-    'additionalTextEdits',
-  },
-}
+-- capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- capabilities.textDocument.completion.completionItem.preselectSupport = true
+-- capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+-- capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+-- capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+-- capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+-- capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+-- capabilities.textDocument.completion.completionItem.resolveSupport = {
+--   properties = {
+--     'documentation',
+--     'detail',
+--     'additionalTextEdits',
+--   },
+-- }
+-- Setup lspconfig.
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
@@ -176,6 +178,25 @@ require'lspconfig'.dockerls.setup{
   cmd = { "docker-langserver", "--stdio" },
   filetypes = { "Dockerfile", "dockerfile" },
   root_dir = nvim_lsp.util.root_pattern("Dockerfile"),
+}
+
+-- Golang
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
+-- https://github.com/golangci/golangci-lint
+-- https://github.com/golang/tools/tree/master/gopls
+require'lspconfig'.golangci_lint_ls.setup{
+  cmd = { "golangci-lint-langserver" },
+  filetypes = { "go", "gomod" },
+  init_options = {
+    command = { "golangci-lint", "run", "--out-format", "json" }
+  },
+  root_dir = nvim_lsp.util.root_pattern('go.work') or nvim_lsp.util.root_pattern('go.mod', '.golangci.yaml', '.git'),
+}
+require'lspconfig'.gopls.setup{
+  cmd = { "gopls" },
+  filetypes = { "go", "gomod", "gotmpl" },
+  root_dir = nvim_lsp.util.root_pattern("go.mod", ".git"),
+  single_file_support = true,
 }
 
 -- HTML

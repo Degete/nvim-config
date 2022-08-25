@@ -9,3 +9,5 @@ vim.api.nvim_set_keymap('n', '<leader>fm', [[<cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap('n', '<leader>fr', [[<cmd>lua require('telescope.builtin').lsp_references()<cr>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fs', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fws', [[<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>]], { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<M-CR>', [[<cmd>lua require('telescope.builtin').lsp_code_actions()<cr>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<M-CR>', '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })

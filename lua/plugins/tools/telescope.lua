@@ -7,48 +7,48 @@
 
 -- Config
 local actions = require('telescope.actions')
+local trouble = require("trouble.providers.telescope")
+
 require('telescope').setup{
   defaults = {
-    -- Default configuration for telescope goes here:
-    -- config_key = value,
+    layout_strategy = 'flex',
+    scroll_strategy = 'cycle',
     mappings = {
       i = {
-        -- map actions.which_key to <C-h> (default: <C-/>)
-        -- actions.which_key shows the mappings for your picker,
-        -- e.g. git_{create, delete, ...}_branch for the git_branches picker
-        ["<C-h>"] = "which_key",
         ["<esc>"] = actions.close,
+        ["<c-t>"] = trouble.open_with_trouble,
+      },
+      n = {
+        ["<c-t>"] = trouble.open_with_trouble,
       }
     }
   },
   pickers = {
-    -- Default configuration for builtin pickers goes here:
-    -- picker_name = {
-    --   picker_config_key = value,
-    --   ...
-    -- }
-    -- Now the picker_config_key will be applied every time you call this
-    -- builtin picker
     lsp_references = { theme = 'dropdown' },
     lsp_code_actions = { theme = 'dropdown' },
     lsp_definitions = { theme = 'dropdown' },
     lsp_implementations = { theme = 'dropdown' },
     buffers = {
-      sort_lastused = true,
+      ignore_current_buffer = true,
+      sort_mru = true,
       previewer = false,
     },
   },
   extensions = {
-    -- Your extension configuration goes here:
-    -- extension_name = {
-    --   extension_config_key = value,
-    -- }
-    -- please take a look at the readme of the extension you want to configure
     fzf = {
       fuzzy = true,
       override_generic_sorter = true,
       override_file_sorter = true,
       case_mode = 'smart_case',
     },
-  }
+    ['ui-select'] = {
+      require('telescope.themes').get_dropdown {},
+    },
+  },
 }
+
+-- Extensions
+local telescope = require 'telescope'
+telescope.load_extension 'frecency'
+telescope.load_extension 'fzf'
+telescope.load_extension 'ui-select'
