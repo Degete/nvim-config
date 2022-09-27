@@ -314,15 +314,26 @@ return require('packer').startup({function(use)
   -- }
 
   -- Explorer
+  -- use {
+  --   -- https://github.com/kyazdani42/nvim-tree.lua
+  --   'kyazdani42/nvim-tree.lua',
+  --   requires = {
+  --     'kyazdani42/nvim-web-devicons',
+  --   },
+  --   tag = 'nightly', -- optional, updated every week. (see issue #1193)
+  --   setup = [[require('plugins.tools.nvim-tree_setup')]],
+  --   config = [[require('plugins.tools.nvim-tree')]],
+  -- }
   use {
-    -- https://github.com/kyazdani42/nvim-tree.lua
-    'kyazdani42/nvim-tree.lua',
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
     requires = {
-      'kyazdani42/nvim-web-devicons',
+      "nvim-lua/plenary.nvim",
+      "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
     },
-    tag = 'nightly', -- optional, updated every week. (see issue #1193)
-    setup = [[require('plugins.tools.nvim-tree_setup')]],
-    config = [[require('plugins.tools.nvim-tree')]],
+    setup = [[require('plugins.tools.neo-tree_setup')]],
+    config = [[require('plugins.tools.neo-tree')]],
   }
 
   -- use {
