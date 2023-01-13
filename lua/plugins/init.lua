@@ -115,6 +115,7 @@ return require('packer').startup({function(use)
   -- Correction
   use {
     'kosayoda/nvim-lightbulb',
+    requires = { 'antoinemadec/FixCursorHold.nvim' },
     config = [[require('plugins.code.lightbulb')]]
   }
   use {
@@ -126,39 +127,42 @@ return require('packer').startup({function(use)
 
   -- Debug
   use {
-    {
-        -- https://github.com/mfussenegger/nvim-dap
-        'mfussenegger/nvim-dap',
-        setup = [[require('plugins.code.dap_setup')]],
-        config = [[require('plugins.code.dap')]],
-        requires = {
-          'jbyuki/one-small-step-for-vimkind',
-        },
-        wants = {
-          'one-small-step-for-vimkind',
-        },
-        module = 'dap',
+    -- https://github.com/mfussenegger/nvim-dap
+    'mfussenegger/nvim-dap',
+    setup = [[require('plugins.code.dap_setup')]],
+    config = [[require('plugins.code.dap')]],
+    requires = {
+      'jbyuki/one-small-step-for-vimkind',
     },
-    {
-      "rcarriga/nvim-dap-ui",
-      requires = { "nvim-dap" },
-      after = { "nvim-dap" },
-      config = [[require('plugins.code.dapui')]],
+    wants = {
+      'one-small-step-for-vimkind',
     },
+    module = 'dap',
+  }
+  use {
+    "rcarriga/nvim-dap-ui",
+    requires = { "nvim-dap" },
+    after = { "nvim-dap" },
+    config = [[require('plugins.code.dapui')]],
+  }
+  use {
+    'theHamsta/nvim-dap-virtual-text',
+    config = [[require('plugins.code.dap-virtual-text')]],
   }
 
   -- Quickfix
-  use {
-    -- https://github.com/kevinhwang91/nvim-bqf
-    'kevinhwang91/nvim-bqf',
-    ft = 'qf',
-  }
+  -- use {
+  --   -- https://github.com/kevinhwang91/nvim-bqf
+  --   'kevinhwang91/nvim-bqf',
+  --   ft = 'qf',
+  -- }
 
   -- Language tools
   -- Rust
   use {
     -- https://github.com/simrat39/rust-tools.nvim
     'simrat39/rust-tools.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
     config = [[require('plugins.languages.rust.rust-tools')]],
   }
   use {
@@ -215,10 +219,7 @@ return require('packer').startup({function(use)
   use {
     -- https://github.com/tversteeg/registers.nvim
     'tversteeg/registers.nvim',
-    keys = {
-      { 'n', '"' },
-      { 'i', '<c-r>' },
-    },
+    config = [[require('plugins.tools.registers')]]
   }
 
   -- Marks
@@ -302,16 +303,16 @@ return require('packer').startup({function(use)
       run = 'make',
     },
   }
-  -- use {
-  --   -- https://github.com/ibhagwan/fzf-lua
-  --   'ibhagwan/fzf-lua',
-  --   requires = {
-  --     'vijaymarupudi/nvim-fzf',
-  --     'kyazdani42/nvim-web-devicons' -- optional for icons
-  --   },
-  --   setup = [[require('plugins.tools.fzf-lua_setup')]],
-  --     config = [[require('plugins.tools.fzf-lua')]],
-  -- }
+  use {
+    -- https://github.com/ibhagwan/fzf-lua
+    'ibhagwan/fzf-lua',
+    requires = {
+      'vijaymarupudi/nvim-fzf',
+      'kyazdani42/nvim-web-devicons' -- optional for icons
+    },
+    -- setup = [[require('plugins.tools.fzf-lua_setup')]],
+    config = [[require('plugins.tools.fzf-lua')]],
+  }
 
   -- Explorer
   -- use {

@@ -101,5 +101,5 @@ exec([[
 
 -- Autoformat on save
 cmd[[
-    autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()
+    autocmd BufWritePre * lua vim.lsp.buf.format()
 ]]

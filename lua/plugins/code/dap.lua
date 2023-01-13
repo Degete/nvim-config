@@ -8,7 +8,7 @@ local dap = require('dap')
 -- C/C++/Rust
 dap.adapters.lldb = {
   type = 'executable',
-  command = '/usr/local/opt/llvm/bin/lldb-vscode',
+  command = '/opt/homebrew/opt/llvm/bin/lldb-vscode',
   name = 'lldb'
 }
 dap.configurations.cpp = {
@@ -67,23 +67,23 @@ dap.configurations.go = {
     mode = "test",
     program = "${file}"
   },
-  -- works with go.mod packages and sub packages 
+  -- works with go.mod packages and sub packages
   {
     type = "delve",
     name = "Debug test (go.mod)",
     request = "launch",
     mode = "test",
     program = "./${relativeFileDirname}"
-  } 
+  }
 }
 
 -- Neovim Lua
 dap.adapters.nlua = function(callback, config)
   callback({ type = 'server', host = config.host, port = config.port })
 end
-dap.configurations.lua = { 
-  { 
-    type = 'nlua', 
+dap.configurations.lua = {
+  {
+    type = 'nlua',
     request = 'attach',
     name = "Attach to running Neovim instance",
     host = function()

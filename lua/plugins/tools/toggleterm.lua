@@ -46,5 +46,6 @@ function _lazydocker_toggle()
   lazydocker:toggle()
 end
 
+vim.api.nvim_set_keymap("n", "<leader>t", "<cmd>ToggleTerm<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>ld", "<cmd>lua _lazydocker_toggle()<cr>", { noremap = true, silent = true })
