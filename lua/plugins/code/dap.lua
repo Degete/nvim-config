@@ -1,7 +1,4 @@
 -- https://github.com/mfussenegger/nvim-dap
-  -- use {
-  --   'mfussenegger/nvim-dap',
-  -- }
 
 local dap = require('dap')
 

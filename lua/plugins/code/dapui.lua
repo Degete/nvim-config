@@ -1,8 +1,4 @@
 -- https://github.com/rcarriga/nvim-dap-ui
--- use {
---   "rcarriga/nvim-dap-ui",
---   requires = { "mfussenegger/nvim-dap"},
--- }
 
 local dap, dapui = require("dap"), require("dapui")
 
@@ -15,9 +11,6 @@ end
 dap.listeners.before.event_exited["dapui_config"] = function()
   dapui.close()
 end
-
-vim.api.nvim_set_keymap('n', '<M-l>', [[<cmd>lua require('dapui').float_element()<cr>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<M-k>', [[<cmd>lua require('dapui').eval()<cr>]], { noremap = true, silent = true })
 
 dapui.setup({
   icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
@@ -75,14 +68,14 @@ dapui.setup({
     -- Display controls in this element
     element = "repl",
     icons = {
-      pause = "",
-      play = "",
-      step_into = "",
-      step_over = "",
-      step_out = "",
+      pause = "",
+      play = "",
+      step_into = "",
+      step_over = "",
+      step_out = "",
       step_back = "",
-      run_last = "↻",
-      terminate = "□",
+      run_last = "",
+      terminate = "",
     },
   },
   floating = {

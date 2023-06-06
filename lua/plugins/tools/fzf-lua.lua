@@ -1,13 +1,5 @@
 -- https://github.com/ibhagwan/fzf-lua
 
--- use {
---   'ibhagwan/fzf-lua',
---   requires = {
---     'vijaymarupudi/nvim-fzf',
---     'kyazdani42/nvim-web-devicons' -- optional for icons
---   }
--- }
-
 -- Install fzf
 -- use = { 'junegunn/fzf', run = './install --bin', }
 
@@ -319,10 +311,10 @@ require'fzf-lua'.setup {
     lsp_icons         = true,
     severity          = "hint",
     icons = {
-      ["Error"]       = { icon = "", color = "red" },       -- error
-      ["Warning"]     = { icon = "", color = "yellow" },    -- warning
-      ["Information"] = { icon = "", color = "blue" },      -- info
-      ["Hint"]        = { icon = "", color = "magenta" },   -- hint
+      ["Error"]       = { icon = "", color = "red" },       -- error
+      ["Warning"]     = { icon = "", color = "yellow" },    -- warning
+      ["Information"] = { icon = "", color = "blue" },      -- info
+      ["Hint"]        = { icon = "󰌶", color = "magenta" },   -- hint
     },
   },
   -- uncomment to disable the previewer

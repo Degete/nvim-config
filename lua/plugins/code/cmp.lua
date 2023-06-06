@@ -1,17 +1,9 @@
 -- https://github.com/hrsh7th/nvim-cmp
 
--- use {
---   "hrsh7th/nvim-cmp",
---   requires = {
---     "hrsh7th/vim-vsnip",
---     "hrsh7th/cmp-buffer",
---   }
--- }
-
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = 'menu,menuone,noselect'
 
--- Setup nvim-cmp.
+-- Set up nvim-cmp.
 local cmp = require'cmp'
 
 cmp.setup({
@@ -41,6 +33,13 @@ cmp.setup({
         fallback()
       end
     end,
+    ['<S-Tab>'] = function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      else
+        fallback()
+      end
+    end,
     ['<C-x><C-s>'] = cmp.mapping.complete({
       config = {
         sources = {
@@ -51,10 +50,16 @@ cmp.setup({
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
+    { name = 'nvim_lsp_signature_help' },
+    -- Extra
+    { name = 'nvim_lua' },
+    -- Snippets
     -- { name = 'vsnip' }, -- For vsnip users.
     { name = 'luasnip' }, -- For luasnip users.
     -- { name = 'ultisnips' }, -- For ultisnips users.
     -- { name = 'snippy' }, -- For snippy users.
+    -- Rust
+    { name = 'crates' },
   }, {
     { name = 'buffer' },
   })
@@ -69,11 +74,11 @@ cmp.setup.filetype('gitcommit', {
   })
 })
 
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
-    { name = 'buffer' }
+    { name = 'buffer' },
   }
 })
 
@@ -81,14 +86,16 @@ cmp.setup.cmdline('/', {
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
-    { name = 'path' }
+    { name = 'path' },
+    { name = 'nvim_lsp_document_symbol' },
   }, {
-    { name = 'cmdline' }
+    { name = 'cmdline' },
   })
 })
 
--- -- Setup lspconfig.
--- local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+-- -- Set up lspconfig.
+-- local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 -- require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
 --   capabilities = capabilities

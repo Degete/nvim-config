@@ -1,5 +1,4 @@
 -- https://github.com/kshenoy/vim-signature
--- use 'kshenoy/vim-signature'
 
 vim.g.SignatureMap = {
     Leader = 'm',

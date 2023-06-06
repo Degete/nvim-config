@@ -1,11 +1,4 @@
 -- https://github.com/noib3/nvim-cokeline
--- use({
---   'noib3/nvim-cokeline',
---   requires = 'kyazdani42/nvim-web-devicons', -- If you want devicons
---   config = function()
---     require('cokeline').setup()
---   end
--- })
 
 local get_hex = require('cokeline/utils').get_hex
 local mappings = require('cokeline/mappings')

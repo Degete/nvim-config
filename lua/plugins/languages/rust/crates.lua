@@ -1,17 +1,15 @@
 -- https://github.com/Saecki/crates.nvim
--- use {
---     'saecki/crates.nvim',
---     event = { "BufRead Cargo.toml" },
---     requires = { { 'nvim-lua/plenary.nvim' } },
---     config = function()
---         require('crates').setup()
---     end,
--- }
 
-require('crates').setup()
+require('crates').setup({
+    popup = {
+        autofocus = true,
+        show_version_date = true,
+        border = 'rounded',
+    }
+})
 
 
--- nvim-cmp autocompletion lazy loading
+-- -- nvim-cmp autocompletion lazy loading
 -- vim.api.nvim_create_autocmd("BufRead", {
 --     group = vim.api.nvim_create_augroup("CmpSourceCargo", { clear = true }),
 --     pattern = "Cargo.toml",

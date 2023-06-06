@@ -5,7 +5,7 @@
 -----------------------------------------------------------
 -- Neovim API aliases
 -----------------------------------------------------------
-local map  = vim.api.nvim_set_keymap    -- Set global keymap
+local map  = vim.keymap.set             -- Set global keymap
 local cmd  = vim.cmd                    -- Execute Vim commands
 local exec = vim.api.nvim_exec          -- Execute Vimscript
 local fn   = vim.fn                     -- Call Vim functions

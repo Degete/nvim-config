@@ -1,2 +1,1 @@
 -- https://github.com/morhetz/gruvbox
--- use 'morhetz/gruvbox'
