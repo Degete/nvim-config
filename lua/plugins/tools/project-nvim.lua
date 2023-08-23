@@ -10,16 +10,18 @@ require("project_nvim").setup({
   -- order matters: if one is not detected, the other is used as fallback. You
   -- can also delete or rearangne the detection methods.
   detection_methods = {
-    "lsp",
     "pattern",
+    "lsp",
   },
 
   -- All the patterns used to detect root dir, when **"pattern"** is in
   -- detection_methods
   patterns = {
     ".git",
+    ".gitignore",
     ".svn",
     ".env",
+    ".editorconfig",
     "Cargo.toml",
     "package.json",
     "Makefile",

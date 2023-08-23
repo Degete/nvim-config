@@ -23,7 +23,7 @@ dap.configurations.cpp = {
     env = function()
       local variables = {}
       for k, v in pairs(vim.fn.environ()) do
-        table.insert(variables, string.format("%s=%s", k, v))
+        table.insert(variables, string.format('%s=%s', k, v))
       end
       return variables
     end,
@@ -35,7 +35,7 @@ dap.configurations.rust = dap.configurations.cpp
 -- Golang
 dap.adapters.delve = {
   type = 'server',
-  host = "127.0.0.1",
+  host = '127.0.0.1',
   port = '38697',
   executable = {
     command = 'dlv',
@@ -46,31 +46,31 @@ dap.adapters.delve = {
 -- https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv_dap.md
 dap.configurations.go = {
   {
-    type = "delve",
-    name = "Debug package",
-    request = "launch",
-    program = "${fileDirname}",
+    type = 'delve',
+    name = 'Debug package',
+    request = 'launch',
+    program = '${fileDirname}',
   },
   {
-    type = "delve",
-    name = "Debug",
-    request = "launch",
-    program = "${file}"
+    type = 'delve',
+    name = 'Debug',
+    request = 'launch',
+    program = '${file}'
   },
   {
-    type = "delve",
-    name = "Debug test", -- configuration for debugging test files
-    request = "launch",
-    mode = "test",
-    program = "${file}"
+    type = 'delve',
+    name = 'Debug test', -- configuration for debugging test files
+    request = 'launch',
+    mode = 'test',
+    program = '${file}'
   },
   -- works with go.mod packages and sub packages
   {
-    type = "delve",
-    name = "Debug test (go.mod)",
-    request = "launch",
-    mode = "test",
-    program = "./${relativeFileDirname}"
+    type = 'delve',
+    name = 'Debug test (go.mod)',
+    request = 'launch',
+    mode = 'test',
+    program = './${relativeFileDirname}'
   }
 }
 
@@ -82,17 +82,17 @@ dap.configurations.lua = {
   {
     type = 'nlua',
     request = 'attach',
-    name = "Attach to running Neovim instance",
+    name = 'Attach to running Neovim instance',
     host = function()
       local value = vim.fn.input('Host [127.0.0.1]: ')
-      if value ~= "" then
+      if value ~= '' then
         return value
       end
       return '127.0.0.1'
     end,
     port = function()
       local val = tonumber(vim.fn.input('Port: '))
-      assert(val, "Please provide a port number")
+      assert(val, 'Please provide a port number')
       return val
     end,
   }
@@ -109,10 +109,10 @@ dap.configurations.python = {
     -- The first three options are required by nvim-dap
     type = 'python'; -- the type here established the link to the adapter definition: `dap.adapters.python`
     request = 'launch';
-    name = "Launch file";
+    name = 'Launch file';
 
     -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
-    program = "${file}"; -- This configuration will launch the current file if used.
+    program = '${file}'; -- This configuration will launch the current file if used.
     pythonPath = function()
       -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
       -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.

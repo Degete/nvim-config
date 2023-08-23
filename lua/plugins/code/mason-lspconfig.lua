@@ -50,8 +50,9 @@ local on_attach = function(client, bufnr)
   local spread = table.unpack
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { spread(bufopts), desc = "Go to declaration"})
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { spread(bufopts), desc = "Go to definition"})
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, { spread(bufopts), desc = "Buffer hover"})
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { spread(bufopts), desc = "Show implementation"})
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, { spread(bufopts), desc = "Show references"})
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, { spread(bufopts), desc = "Buffer hover"})
   vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { spread(bufopts), desc = "Show signature"})
   vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, { spread(bufopts), desc = "Add workspace folder"})
   vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, { spread(bufopts), desc = "Remove workspace folder"})
@@ -61,9 +62,9 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, { spread(bufopts), desc = "Show type definition"})
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, { spread(bufopts), desc = "Rename"})
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, { spread(bufopts), desc = "Code action"})
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, { spread(bufopts), desc = "Show references"})
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, { spread(bufopts), desc = "Format"})
 
+  -- Rust
   -- Hover actions
   vim.keymap.set("n", "<C-space>", require("rust-tools").hover_actions.hover_actions, { buffer = bufnr, desc = "Hover actions" })
   -- Code action groups
@@ -109,87 +110,87 @@ require("mason-lspconfig").setup_handlers({
   -- and will be called for each installed server that doesn't have
   -- a dedicated handler.
   function (server_name) -- default handler (optional)
-      require("lspconfig")[server_name].setup({
-        on_attach = on_attach,
-        flags = lsp_flags,
-        capabilities = capabilities,
-        handlers = handlers,
-      })
+    require("lspconfig")[server_name].setup({
+      on_attach = on_attach,
+      flags = lsp_flags,
+      capabilities = capabilities,
+      handlers = handlers,
+    })
   end,
   -- Next, you can provide a dedicated handler for specific servers.
   -- For example, a handler override for the `rust_analyzer`:
   ["rust_analyzer"] = function ()
-      require("rust-tools").setup({
-        tools = { -- rust-tools options
-          -- how to execute terminal commands
-          -- options right now: termopen / quickfix
-          executor = require("rust-tools.executors").termopen,
+    require("rust-tools").setup({
+      tools = { -- rust-tools options
+        -- how to execute terminal commands
+        -- options right now: termopen / quickfix
+        executor = require("rust-tools.executors").termopen,
 
-          -- callback to execute once rust-analyzer is done initializing the workspace
-          -- The callback receives one parameter indicating the `health` of the server: "ok" | "warning" | "error"
-          on_initialized = nil,
+        -- callback to execute once rust-analyzer is done initializing the workspace
+        -- The callback receives one parameter indicating the `health` of the server: "ok" | "warning" | "error"
+        on_initialized = nil,
 
-          -- automatically call RustReloadWorkspace when writing to a Cargo.toml file.
-          reload_workspace_from_cargo_toml = true,
+        -- automatically call RustReloadWorkspace when writing to a Cargo.toml file.
+        reload_workspace_from_cargo_toml = true,
 
-          -- These apply to the default RustSetInlayHints command
-          inlay_hints = {
-            -- automatically set inlay hints (type hints)
-            -- default: true
-            auto = true,
+        -- These apply to the default RustSetInlayHints command
+        inlay_hints = {
+          -- automatically set inlay hints (type hints)
+          -- default: true
+          auto = true,
 
-            -- Only show inlay hints for the current line
-            only_current_line = false,
+          -- Only show inlay hints for the current line
+          only_current_line = false,
 
-            -- whether to show parameter hints with the inlay hints or not
-            -- default: true
-            show_parameter_hints = true,
+          -- whether to show parameter hints with the inlay hints or not
+          -- default: true
+          show_parameter_hints = true,
 
-            -- prefix for parameter hints
-            -- default: "<-"
-            parameter_hints_prefix = "<- ",
+          -- prefix for parameter hints
+          -- default: "<-"
+          parameter_hints_prefix = "<- ",
 
-            -- prefix for all the other hints (type, chaining)
-            -- default: "=>"
-            other_hints_prefix = "=> ",
+          -- prefix for all the other hints (type, chaining)
+          -- default: "=>"
+          other_hints_prefix = "=> ",
 
-            -- whether to align to the length of the longest line in the file
-            max_len_align = false,
+          -- whether to align to the length of the longest line in the file
+          max_len_align = false,
 
-            -- padding from the left if max_len_align is true
-            max_len_align_padding = 1,
+          -- padding from the left if max_len_align is true
+          max_len_align_padding = 1,
 
-            -- whether to align to the extreme right or not
-            right_align = false,
+          -- whether to align to the extreme right or not
+          right_align = false,
 
-            -- padding from the right if right_align is true
-            right_align_padding = 7,
+          -- padding from the right if right_align is true
+          right_align_padding = 7,
 
-            -- The color of the hints
-            highlight = "Comment",
-          },
-
-          -- options same as lsp hover / vim.lsp.util.open_floating_preview()
-          hover_actions = {
-            -- whether the hover action window gets automatically focused
-            -- default: false
-            auto_focus = true,
-          },
+          -- The color of the hints
+          highlight = "Comment",
         },
-        dap = {
-          adapter = {
-            type = "executable",
-            command = '/opt/homebrew/opt/llvm/bin/lldb-vscode',
-            name = "rt_lldb"
-          }
+
+        -- options same as lsp hover / vim.lsp.util.open_floating_preview()
+        hover_actions = {
+          -- whether the hover action window gets automatically focused
+          -- default: false
+          auto_focus = true,
         },
-        server = {
-          on_attach = on_attach,
-          flags = lsp_flags,
-          capabilities = capabilities,
-          handlers = handlers,
-        },
-      })
+      },
+      dap = {
+        adapter = {
+          type = "executable",
+          command = '/opt/homebrew/opt/llvm/bin/lldb-vscode',
+          name = "rt_lldb"
+        }
+      },
+      server = {
+        on_attach = on_attach,
+        flags = lsp_flags,
+        capabilities = capabilities,
+        handlers = handlers,
+      },
+    })
   end
 })
 

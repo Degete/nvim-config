@@ -1,11 +1,9 @@
 -- https://github.com/ibhagwan/fzf-lua
 
--- Install fzf
--- use = { 'junegunn/fzf', run = './install --bin', }
-
 -- Config
 local actions = require "fzf-lua.actions"
-require'fzf-lua'.setup {
+
+require('fzf-lua').setup({
   winopts = {
     -- split         = "belowright new",-- open in a split instead?
                                         -- "belowright new"  : split below
@@ -337,4 +335,4 @@ require'fzf-lua'.setup {
   file_icon_colors = {
     ["lua"]   = "blue",
   },
-}
+})

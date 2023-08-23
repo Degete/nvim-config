@@ -12,8 +12,18 @@ ln -s ~/.nvim .config/nvim
 
 ### Plugins
 
-To install the plugins, you can just open nvim or run the following command:
+To update the plugins, you can just open nvim or run the following command:
 
 ```sh
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+nvim --headless "+Lazy! sync" +qa
 ```
+
+## Configuration
+
+Configuration is divided into different sections:
+
+### General
+
+### Mappings
+
+### Plugins

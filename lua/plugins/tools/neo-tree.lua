@@ -5,6 +5,7 @@ require("neo-tree").setup({
   popup_border_style = "rounded",
   enable_git_status = true,
   enable_diagnostics = true,
+  enable_normal_mode_for_inputs = false, -- Enable normal mode for input dialogs.
   open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
   sort_case_insensitive = false, -- used when sorting files and directories in the tree
   sort_function = nil , -- use a custom function for sorting files and directories in the tree
@@ -37,7 +38,6 @@ require("neo-tree").setup({
       folder_closed = "",
       folder_open = "",
       folder_empty = "󰜌",
-      folder_empty_open = "󰜌",
       -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
       -- then these will never be used.
       default = "*",
@@ -55,42 +55,22 @@ require("neo-tree").setup({
     git_status = {
       symbols = {
         -- Change type
-        added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-        modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
-        deleted   = "",-- this can only be used in the git_status source
-        renamed   = "",-- this can only be used in the git_status source
+        added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
+        modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
+        deleted   = "✖",-- this can only be used in the git_status source
+        renamed   = "󰁕",-- this can only be used in the git_status source
         -- Status type
-        untracked = "",
+        untracked = "",
         ignored   = "",
-        unstaged  = "",
-        staged    = "󰄵",
-        conflict  = "",
+        unstaged  = "󰄱",
+        staged    = "",
+        conflict  = "",
       }
     },
   },
-  document_symbols = {
-    kinds = {
-      File = { icon = "󰈙", hl = "Tag" },
-      Namespace = { icon = "󰌗", hl = "Include" },
-      Package = { icon = "󰏖", hl = "Label" },
-      Class = { icon = "󰌗", hl = "Include" },
-      Property = { icon = "󰆧", hl = "@property" },
-      Enum = { icon = "󰒻", hl = "@number" },
-      Function = { icon = "󰊕", hl = "Function" },
-      String = { icon = "󰀬", hl = "String" },
-      Number = { icon = "󰎠", hl = "Number" },
-      Array = { icon = "󰅪", hl = "Type" },
-      Object = { icon = "󰅩", hl = "Type" },
-      Key = { icon = "󰌋", hl = "" },
-      Struct = { icon = "󰌗", hl = "Type" },
-      Operator = { icon = "󰆕", hl = "Operator" },
-      TypeParameter = { icon = "󰊄", hl = "Type" },
-      StaticMethod = { icon = '󰠄 ', hl = 'Function' },
-    }
-  },
   -- A list of functions, each representing a global custom command
   -- that will be available in all sources (if not overridden in `opts[source_name].commands`)
-  -- see `:h neo-tree-global-custom-commands`
+  -- see `:h neo-tree-custom-commands-global`
   commands = {},
   window = {
     position = "left",
@@ -106,11 +86,11 @@ require("neo-tree").setup({
       },
       ["<2-LeftMouse>"] = "open",
       ["<cr>"] = "open",
-      ["<esc>"] = "revert_preview",
+      ["<esc>"] = "cancel", -- close preview or floating neo-tree window
       ["P"] = { "toggle_preview", config = { use_float = true } },
       ["l"] = "focus_preview",
-      ["S"] = "open_split",
-      ["s"] = "open_vsplit",
+      -- ["S"] = "open_split",
+      -- ["s"] = "open_vsplit",
       ["S"] = "split_with_window_picker",
       ["s"] = "vsplit_with_window_picker",
       ["t"] = "open_tabnew",
@@ -127,7 +107,7 @@ require("neo-tree").setup({
         -- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
         -- some commands may take optional config options, see `:h neo-tree-mappings` for details
         config = {
-          show_path = "relative" -- "none", "relative", "absolute"
+          show_path = "none" -- "none", "relative", "absolute"
         }
       },
       ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
@@ -176,8 +156,11 @@ require("neo-tree").setup({
         --".null-ls_*",
       },
     },
-    follow_current_file = false, -- This will find and focus the file in the active buffer every
-                                  -- time the current file is changed while the tree is open.
+    follow_current_file = {
+      enabled = false, -- This will find and focus the file in the active buffer every time
+      --               -- the current file is changed while the tree is open.
+      leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+    },
     group_empty_dirs = false, -- when true, empty folders will be grouped together
     hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
                                             -- in whatever position is specified in window.position
@@ -211,8 +194,11 @@ require("neo-tree").setup({
     commands = {} -- Add a custom command or override a global one using the same function name
   },
   buffers = {
-    follow_current_file = true, -- This will find and focus the file in the active buffer every
-                                  -- time the current file is changed while the tree is open.
+    follow_current_file = {
+      enabled = true, -- This will find and focus the file in the active buffer every time
+      --              -- the current file is changed while the tree is open.
+      leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+    },
     group_empty_dirs = true, -- when true, empty folders will be grouped together
     show_unloaded = true,
     window = {
