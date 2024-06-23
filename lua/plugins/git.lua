@@ -1,13 +1,12 @@
 return {
-  "lewis6991/gitsigns.nvim",
-  opts = {
-    current_line_blame = true,
-    current_line_blame_opts = {
-      virt_text = true,
-      virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
-      delay = 1000,
-      ignore_whitespace = true,
-    },
-    current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
-  },
+  -- https://github.com/lewis6991/gitsigns.nvim
+  { "lewis6991/gitsigns.nvim" },
+  -- https://github.com/tpope/vim-fugitive
+  { "tpope/vim-fugitive" },
+  -- https://github.com/tpope/vim-rhubarb
+  { "tpope/vim-rhubarb" },
+  -- https://github.com/rhysd/git-messenger.vim
+  { "rhysd/git-messenger.vim" },
+  -- https://github.com/sindrets/diffview.nvim
+  { "sindrets/diffview.nvim" },
 }

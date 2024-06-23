@@ -1,18 +1,25 @@
 return {
   "telescope.nvim",
+  opts = {
+    pickers = {
+      colorscheme = {
+        enable_preview = true
+      },
+    },
+  },
   dependencies = {
     {
       "nvim-telescope/telescope-fzf-native.nvim",
-      build = "make",
+      build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
       config = function()
         require("telescope").load_extension("fzf")
       end
     },
     {
       'nvim-telescope/telescope-frecency.nvim',
-      dependencies = {
-        'kkharji/sqlite.lua',
-      },
+      config = function()
+        require("telescope").load_extension "frecency"
+      end,
     },
     {
       'nvim-telescope/telescope-ui-select.nvim',
