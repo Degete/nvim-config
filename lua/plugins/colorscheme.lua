@@ -61,13 +61,12 @@ return {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
-  },
-
-  -- Configure LazyVim to load a selected theme
-  {
-    "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyonight",
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
     },
   },
 
@@ -86,5 +85,13 @@ return {
         vim.cmd("colorscheme tokyonight-day")
       end,
     },
-  }
+  },
+
+  -- Configure LazyVim to load a selected theme
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "tokyonight",
+    },
+  },
 }

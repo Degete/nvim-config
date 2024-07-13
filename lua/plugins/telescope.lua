@@ -1,6 +1,9 @@
 return {
   "telescope.nvim",
   opts = {
+    defaults = {
+      vertical = { width = 0.95 }
+    },
     pickers = {
       colorscheme = {
         enable_preview = true
