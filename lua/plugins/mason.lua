@@ -4,8 +4,8 @@ return {
     opts = {
       ui = {
         border = "single",
-        width = 0.95,
-        height = 0.95,
+        width = 0.9,
+        height = 0.9,
       },
     },
   },
