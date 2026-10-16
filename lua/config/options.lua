@@ -7,3 +7,6 @@ vim.g.lazyvim_picker = "snacks"
 
 -- Enable this option to avoid conflicts with Prettier.
 vim.g.lazyvim_prettier_needs_config = true
+
+-- Set floating windows borders
+vim.o.winborder = "rounded"

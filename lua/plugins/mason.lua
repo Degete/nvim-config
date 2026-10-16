@@ -3,8 +3,8 @@ return {
     "mason-org/mason.nvim",
     opts = {
       ui = {
-        border = "single",
-        width = 0.9,
+        border = "rounded",
+        width = 0.95,
         height = 0.9,
       },
     },

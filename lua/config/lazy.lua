@@ -106,10 +106,10 @@ require("lazy").setup({
   },
   ui = {
     -- a number <1 is a percentage., >1 is a fixed size
-    size = { width = 0.9, height = 0.9 },
+    size = { width = 0.95, height = 0.9 },
     wrap = true, -- wrap the lines in the ui
     -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
-    border = "single",
+    border = "rounded",
     -- The backdrop opacity. 0 is fully opaque, 100 is fully transparent.
     backdrop = 60,
     title = nil, ---@type string only works when border is not "none"
