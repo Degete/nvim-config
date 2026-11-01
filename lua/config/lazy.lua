@@ -37,8 +37,6 @@ require("lazy").setup({
       -- when running inside vscode for example
       cond = nil, ---@type boolean|fun(self:LazyPlugin):boolean|nil
   },
-  -- leave nil when passing the spec as the first argument to setup()
-  spec = nil, ---@type LazySpec
   local_spec = true, -- load project specific .lazy.lua spec files. They will be added at the end of the spec.
   lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json", -- lockfile generated after running update.
   ---@type number? limit the maximum amount of concurrent tasks

@@ -10,7 +10,7 @@
 
 -- Disable autoformat for specific files
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { 
+  pattern = {
     "lua",
   },
   callback = function()

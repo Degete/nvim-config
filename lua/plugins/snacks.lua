@@ -5,6 +5,12 @@ return {
     "folke/snacks.nvim",
     ---@type snacks.Config
     opts = {
+      picker = {
+        layouts = {
+          default = { layout = { width = 0.95, height = 0.9, min_width = 0 } },
+          vertical = { layout = { width = 0.95, height = 0.9, min_width = 0, min_height = 0 } },
+        },
+      },
       dashboard = {
         -- your dashboard configuration comes here
         -- or leave it empty to use the default settings
